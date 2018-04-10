@@ -3,40 +3,42 @@ package com.example.spring.mysql.model;
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity (name="USERS")// This tells Hibernate to make a table out of this class
 @Component
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long idUser;
+    @Column(name = "ID_USER", nullable = false)
+    private Long userId;
 
+    @Column(name = "USERNAME")
     private String username;
+    @Column(name = "PASSWORD")
     private String password;
+    @Column(name = "EMAIL")
     private String email;
-    private Integer idRole;
+    @Column(name = "ID_ROLE")
+    private Long roleId;
 
-    public Users() {
+    public User() {
         this.username = "";
     }
 
-    public Users(Long idUser) {
-        this.idUser = idUser;
+    public User(Long userId) {
+        this.userId = userId;
     }
 
-    public Users(String username, String password, String email, Integer idRole) {
+    public User(String username, String password, String email, Long roleId) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.idRole = idRole;
+        this.roleId = roleId;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public Long getUserId() {
+        return userId;
     }
 
     public String getUsername() {
@@ -51,7 +53,7 @@ public class Users {
         return email;
     }
 
-    public Integer getIdRole() {
-        return idRole;
+    public Long getRoleId() {
+        return roleId;
     }
 }
