@@ -1,6 +1,5 @@
 package com.example.spring.mysql.model;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
