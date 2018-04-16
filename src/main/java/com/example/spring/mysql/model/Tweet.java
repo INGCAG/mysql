@@ -10,25 +10,22 @@ public class Tweet {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "ID_TWEET", nullable = false)
-    private Long tweetId;
+    private Long tweetInternalId;
 
     @Column(name = "EXTERNAL_ID")
-    private Long externalId;
+    private Long id;
 
     @Column(name = "TEXT")
     private String text;
 
     @Column(name = "UNMODIFIED_TEXT")
-    private String unmodifiedtext;
+    private String unmodifiedText;
 
     @Column(name = "SOURCE")
     private String source;
 
-    @Column(name = "TWEETER_USER_ID")
-    private Long user;//reference
-
     @Column(name = "CREATE_AT")
-    private Long createdAt;
+    private String createdAt;
 
     @Column(name = "FROM_USER")
     private String fromUser;
@@ -37,13 +34,13 @@ public class Tweet {
     private String profileImageUrl;
 
     @Column(name = "TO_USER_ID")
-    private Long toUserId;//default(0)
+    private String toUserId;//default(0)
 
     @Column(name = "FROM_USER_ID")
-    private Long fromUserId;
+    private String fromUserId;
 
     @Column(name = "IN_REPLY_TO_STATUS_ID")
-    private Long inReplyToStatusId;//default(null)
+    private String inReplyToStatusId;//default(null)
 
     @Column(name = "LANGUAGE_CODE")
     private String languageCode;
@@ -67,36 +64,41 @@ public class Tweet {
     private Long favoriteCount;//default(0)
 
     @Column(name = "IN_REPLY_TO_USER_ID")
-    private Long inReplyToUserId;//default(null)
+    private String inReplyToUserId;//default(null)
 
     @Column(name = "IN_REPLY_TO_SCREEN_NAME")
     private String inReplyToScreenName;//default(null)
 
-    public Long getTweetId() {
-        return tweetId;
+    @ManyToOne
+    @JoinColumn(name = "TWEETER_USER_ID")
+    private TwitterUser user;
+    /*
+        @Column(name = "TWEETER_USER_ID")
+        private Long user;//reference
+
+
+    */
+    public Long getTweetInternalId() {
+        return tweetInternalId;
     }
 
-    public Long getExternalId() {
-        return externalId;
+    public Long getId() {
+        return id;
     }
 
     public String getText() {
         return text;
     }
 
-    public String getUnmodifiedtext() {
-        return unmodifiedtext;
+    public String getUnmodifiedText() {
+        return unmodifiedText;
     }
 
     public String getSource() {
         return source;
     }
 
-    public Long getUser() {
-        return user;
-    }
-
-    public Long getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
@@ -108,15 +110,15 @@ public class Tweet {
         return profileImageUrl;
     }
 
-    public Long getToUserId() {
+    public String getToUserId() {
         return toUserId;
     }
 
-    public Long getFromUserId() {
+    public String getFromUserId() {
         return fromUserId;
     }
 
-    public Long getInReplyToStatusId() {
+    public String getInReplyToStatusId() {
         return inReplyToStatusId;
     }
 
@@ -148,7 +150,7 @@ public class Tweet {
         return favoriteCount;
     }
 
-    public Long getInReplyToUserId() {
+    public String getInReplyToUserId() {
         return inReplyToUserId;
     }
 
@@ -156,20 +158,23 @@ public class Tweet {
         return inReplyToScreenName;
     }
 
-    public Tweet() {
+    public TwitterUser getUser() {
+        return user;
     }
 
-    public Tweet(Long tweetId) {
-        this.tweetId = tweetId;
-    }
-
-    public Tweet(Long tweetId, Long externalId, String text, String unmodifiedtext, String source, Long user, Long createdAt, String fromUser, String profileImageUrl, Long toUserId, Long fromUserId, Long inReplyToStatusId, String languageCode, Long retweetCount, Boolean retweeted, String retweetedStatus, Boolean retweet, Boolean favorited, Long favoriteCount, Long inReplyToUserId, String inReplyToScreenName) {
-        this.tweetId = tweetId;
-        this.externalId = externalId;
+    public Tweet(Long tweetInternalId, Long id, String text, String unmodifiedText) {
+        this.tweetInternalId = tweetInternalId;
+        this.id = id;
         this.text = text;
-        this.unmodifiedtext = unmodifiedtext;
+        this.unmodifiedText = unmodifiedText;
+    }
+
+    public Tweet(Long tweetInternalId, Long id, String text, String unmodifiedText, String source, String createdAt, String fromUser, String profileImageUrl, String toUserId, String fromUserId, String inReplyToStatusId, String languageCode, Long retweetCount, Boolean retweeted, String retweetedStatus, Boolean retweet, Boolean favorited, Long favoriteCount, String inReplyToUserId, String inReplyToScreenName) {
+        this.tweetInternalId = tweetInternalId;
+        this.id = id;
+        this.text = text;
+        this.unmodifiedText = unmodifiedText;
         this.source = source;
-        this.user = user;
         this.createdAt = createdAt;
         this.fromUser = fromUser;
         this.profileImageUrl = profileImageUrl;
@@ -185,5 +190,12 @@ public class Tweet {
         this.favoriteCount = favoriteCount;
         this.inReplyToUserId = inReplyToUserId;
         this.inReplyToScreenName = inReplyToScreenName;
+    }
+
+    public Tweet(Long tweetInternalId) {
+        this.tweetInternalId = tweetInternalId;
+    }
+
+    public Tweet() {
     }
 }
