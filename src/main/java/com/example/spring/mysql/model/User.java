@@ -4,11 +4,11 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Entity (name="USERS")// This tells Hibernate to make a table out of this class
+@Entity(name = "USERS")// This tells Hibernate to make a table out of this class
 @Component
 public class User {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID_USER", nullable = false)
     private Long userId;
 
@@ -29,7 +29,8 @@ public class User {
         this.userId = userId;
     }
 
-    public User(String username, String password, String email, Long roleId) {
+    public User(Long userId, String username, String password, String email, Long roleId) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
