@@ -35,6 +35,12 @@ dependencies {
 
 	// Use MySQL Connector-J
 	compile 'mysql:mysql-connector-java'
+
+	// Use PostgreSQL Connector-J
+//	compile 'postgresql:postgresql:42.2.2'
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
+
 }
 
 bootJar {
