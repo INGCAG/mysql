@@ -27,3 +27,4 @@ hs_err_pid*
 /src/main/resources/application.properties
 /mysql.properties
 /out/production/resources/application.properties
+/out/
