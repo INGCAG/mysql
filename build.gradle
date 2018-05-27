@@ -37,9 +37,11 @@ dependencies {
 	compile 'mysql:mysql-connector-java'
 
 	// Use PostgreSQL Connector-J
-//	compile 'postgresql:postgresql:42.2.2'
-    // https://mvnrepository.com/artifact/org.postgresql/postgresql
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
+
+	// Swagger
+	compile("io.springfox:springfox-swagger2:2.6.1")
+	compile("io.springfox:springfox-swagger-ui:2.6.1")
 
 }
 
